@@ -70,9 +70,14 @@ function FilmListView() {
         handler(itemId(this));
       });
     },
-    toogleFavouriteHandler: function(handler) {
-      $delegate(document.querySelector('.movie-list'), 'li .list-title span', 'click', function() {
-        handler(itemId(this));
+    addLikeHandler: function(handler) {
+      $delegate(document.querySelector('.searchresults'), 'li .like', 'click', function() {
+        handler(itemId(this),this);
+      });
+    },
+    deleteLikeHandler: function(handler) {
+      $delegate(document.querySelector('.searchresults'), 'li .liked', 'click', function() {
+        handler(itemId(this),this);
       });
     }
   };

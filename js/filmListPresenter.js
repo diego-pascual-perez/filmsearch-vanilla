@@ -23,10 +23,22 @@ function FilmListPresenter(_view, _model) {
         view.addShowFilmDetailsFromImgHandler(function(imdbID) {
           document.location.hash += '/' + encodeURIComponent(imdbID);
         });
-        /*view.toogleFavouriteHandler(function(imdbID) {
-          model.toogleFavourite(imdbID);
-          document.location.reload();
-        });*/
+        view.addLikeHandler(function(imdbID,element) {
+          model.addDeleteLike(imdbID);
+          element.innerHTML = "Liked!";
+          setTimeout(function(){
+            element.classList.remove("like");
+            element.classList.add("liked");
+          }, 500);
+        });
+        view.deleteLikeHandler(function(imdbID,element) {
+          model.addDeleteLike(imdbID);
+          element.innerHTML = "Like";
+          setTimeout(function(){
+            element.classList.remove("liked");
+            element.classList.add("like");
+          }, 500);
+        })
       }
     }
   };

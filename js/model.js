@@ -63,7 +63,7 @@ function Model() {
     getFavourites: function() {
       return JSON.parse(localStorage.getItem('favourites')) || [];
     },
-    toogleFavourite: function(imdbID) {
+    addDeleteLike: function(imdbID) {
       const favourites = JSON.parse(localStorage.getItem('favourites')) || [];
       const index = favourites.indexOf(imdbID);
       if (index > -1) {
