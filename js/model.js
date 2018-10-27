@@ -4,7 +4,7 @@ function Model() {
     state = {
       films: [],
       showfilmdetail: {},
-      user: {},
+      user: JSON.parse(sessionStorage.getItem('user')) || {},
       //cache: { movies: {}, details: {} }
     };
   }
@@ -38,7 +38,7 @@ function Model() {
               const movies = res.Search.map(item => {
                 return {
                   ...item,
-                  isFavourite: public.getFavourites().includes(item.imdbID)
+                  isFavourite: public.getLikes().includes(item.imdbID)
                 };
               });
               state.films = movies;
@@ -53,25 +53,26 @@ function Model() {
             .then(res => {
               state.showfilmdetail = {
                 ...res,
-                isFavourite: public.getFavourites().includes(res.imdbID)
+                isFavourite: public.getLikes().includes(res.imdbID)
               };
               resolve(state.showfilmdetail);
             })
             .catch(console.log);
       });
     },
-    getFavourites: function() {
-      return JSON.parse(localStorage.getItem('favourites')) || [];
+    getLikes: function() {
+      console.log(public.getState().user);
+      return JSON.parse(localStorage.getItem(state.user)) || [];
     },
     addDeleteLike: function(imdbID) {
-      const favourites = JSON.parse(localStorage.getItem('favourites')) || [];
-      const index = favourites.indexOf(imdbID);
+      const likes = JSON.parse(localStorage.getItem(state.user)) || [];
+      const index = likes.indexOf(imdbID);
       if (index > -1) {
-        favourites.splice(index, 1);
+        likes.splice(index, 1);
       } else {
-        favourites.push(imdbID);
+        likes.push(imdbID);
       }
-      localStorage.setItem('favourites', JSON.stringify(favourites));
+      localStorage.setItem(state.user, JSON.stringify(likes));
     },
     getUser: function() {
       return JSON.parse(sessionStorage.getItem('user')) || null;
@@ -82,6 +83,8 @@ function Model() {
       } else {
         sessionStorage.removeItem('user');
       }
+      state.user = user;
+      document.location.reload();
     }
   };
 
