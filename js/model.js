@@ -2,9 +2,9 @@ function Model() {
   let state;
   function init() {
     state = {
-      //user: {},
       films: [],
-      detail: {},
+      showfilmdetail: {},
+      user: {},
       //cache: { movies: {}, details: {} }
     };
   }
@@ -51,11 +51,11 @@ function Model() {
       return new Promise((resolve, reject) => {
           get(`i=${imdbID}`)
             .then(res => {
-              state.detail = {
+              state.showfilmdetail = {
                 ...res,
                 isFavourite: public.getFavourites().includes(res.imdbID)
               };
-              resolve(state.detail);
+              resolve(state.showfilmdetail);
             })
             .catch(console.log);
       });

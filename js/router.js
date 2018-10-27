@@ -5,7 +5,7 @@
     this.model = new Model();
     this.filmList = new FilmListPresenter(new FilmListView(), this.model);
     this.filmDetails = new FilmDetailPresenter(new FilmDetailView(), this.model);
-    //this.user = new UserPresenter(new LoginView(), new UserView(), this.model);
+    this.user = new UserPresenter(new UserView(), this.model);
   }
 
   const films = new FilmsWeb();
@@ -29,7 +29,7 @@
       // empty search
       films.filmList.presentView(null);
     }
-    //films.user.presentView();
+    films.user.presentView();
   }
   window.addEventListener('load', changeRoute);
   window.addEventListener('hashchange', changeRoute);

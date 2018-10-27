@@ -56,7 +56,6 @@ function FilmListView() {
       });
     },
     addShowFilmDetailsHandler: function(handler) {
-    	console.log(document.querySelector('.searchresults'));
       $delegate(document.querySelector('.searchresults'), 'li .resultsrow-in', 'click', function() {
         handler(itemId(this));
       });
