@@ -10,7 +10,7 @@ function FilmDetailPresenter(_view, _model) {
     presentView: detail => {
       view.presentView(detail);
       view.addCloseDetailFilmHandler(function() {
-        document.location.back();
+        window.history.back();
       });
     }
   };

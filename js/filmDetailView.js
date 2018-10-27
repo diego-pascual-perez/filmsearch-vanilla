@@ -27,8 +27,8 @@ function FilmDetailView() {
       document.querySelector('#main').innerHTML = content;
     },
     addCloseDetailFilmHandler: function(handler) {
-    	document.querySelector('.filmdetailsclose').addEventListener('change', function() {
-        handler(document.querySelector('.filmdetailsclose'));
+    	document.querySelector('.filmdetailsclose').addEventListener('click', function() {
+        handler();
       });
     },
   };

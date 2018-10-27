@@ -85,6 +85,7 @@ body {
 }
 .resultsrow-title em {
 	font-style: normal;
+	display: block;
 }
 .resultsrow-year {
 	display:block;
@@ -93,6 +94,7 @@ body {
 }
 .resultsrow-year em {
 	font-style: normal;
+	display: block;
 }
 .resultsrow-imdbID {
 	display:block;
@@ -101,6 +103,7 @@ body {
 }
 .resultsrow-imdbID em {
 	font-style: normal;
+	display: block;
 }
 .like {
 	position: absolute;
