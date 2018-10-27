@@ -61,7 +61,6 @@ function Model() {
       });
     },
     getLikes: function() {
-      console.log(public.getState().user);
       return JSON.parse(localStorage.getItem(state.user)) || [];
     },
     addDeleteLike: function(imdbID) {
