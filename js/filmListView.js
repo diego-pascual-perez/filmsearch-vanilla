@@ -79,7 +79,12 @@ function FilmListView() {
       $delegate(document.querySelector('.searchresults'), 'li .liked', 'click', function() {
         handler(itemId(this),this);
       });
-    }
+    },
+    addOnScrollSearchResultsHandler: function(handler) {
+    	document.querySelector('.searchresults').addEventListener("scroll", function() {
+        handler(this);
+      });
+    },
   };
 
   return public;

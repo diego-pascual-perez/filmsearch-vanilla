@@ -5,6 +5,7 @@ function Model() {
       films: [],
       showfilmdetail: {},
       user: JSON.parse(sessionStorage.getItem('user')) || {},
+      paginating: false,
       //cache: { movies: {}, details: {} }
     };
   }
@@ -84,7 +85,10 @@ function Model() {
       }
       state.user = user;
       document.location.reload();
-    }
+    },
+    setPaginating: function(value) {
+      state.paginating = value;
+    },
   };
 
   init();

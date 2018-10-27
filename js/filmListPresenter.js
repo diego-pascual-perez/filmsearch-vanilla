@@ -38,7 +38,15 @@ function FilmListPresenter(_view, _model) {
             element.classList.remove("liked");
             element.classList.add("like");
           }, 500);
-        })
+        });
+        view.addOnScrollSearchResultsHandler(function(element) {
+          if(!model.getState().paginating) {
+            if ((model.getState().films.length - 1) * 150 < element.clientHeight + element.scrollTop) {
+              console.log("next page");
+              model.setPaginating(true);
+            }
+          }
+        });
       }
     }
   };
