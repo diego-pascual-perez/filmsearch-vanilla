@@ -6,7 +6,7 @@ function FilmDetailView() {
       <div class="filmdetailscontainer">
         <div class="filmdetailsheader">`;
       if (detail.Poster === 'N/A') {
-        content += `<div class="filmdetailsposternoimage" />`;
+        content += `<div class="filmdetailsposternoimage"></div>`;
       } else {
         content += `<img src=${detail.Poster} alt=${detail.Title} />`;
       }

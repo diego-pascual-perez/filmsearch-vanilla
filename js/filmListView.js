@@ -3,9 +3,14 @@ function FilmListView() {
     let i;
     let view = '';
     for (i = 0; i < films.length; i++) {
+      let filmimage = '';
+      if (films[i].Poster === 'N/A') {
+        filmimage = `<div class="noimage"></div>`;
+      } else {
+        filmimage = `<img src=${films[i].Poster} alt=${films[i].Title} />`;
+      }
       let template = `<li class="resultsrow" data-id=${films[i].imdbID}>
-				<div class="resultsrow-in">
-					<img src=` + films[i].Poster + ` alt=` + films[i].Title + `>
+				<div class="resultsrow-in">` + filmimage + `
 					<div class="resultsrow-right">
 						<div class="resultsrow-title"><em>` + films[i].Title + `</em></div>
 						<div class="resultsrow-year"><em>Year: ` + films[i].Year + `</em></div>
