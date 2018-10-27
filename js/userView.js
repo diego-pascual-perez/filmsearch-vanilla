@@ -20,6 +20,11 @@ function UserView() {
         handler(document.querySelector('.logininput').value);
       });
     },
+    addLoginWithEnterHandler: function(handler) {
+      $delegate(document.querySelector('#loginform'), '.logininput', 'change', function() {
+        handler(document.querySelector('.logininput').value);
+      });
+    },
     addLogoutHandler: function(handler) {
       $delegate(document.querySelector('#loginform'), '#logoutbutton', 'click', function() {
         handler();

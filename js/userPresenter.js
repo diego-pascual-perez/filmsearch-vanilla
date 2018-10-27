@@ -19,6 +19,10 @@ function UserPresenter(_user, _model) {
          model.saveUser(null);
          public.presentView();
       });
+      user.addLoginWithEnterHandler((user) => {
+        model.saveUser(user);
+        public.presentView();
+     });
     }
   };
 
