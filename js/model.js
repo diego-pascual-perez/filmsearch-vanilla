@@ -4,14 +4,14 @@ function Model() {
     state = {
       //user: {},
       films: [],
-      //detail: {},
+      detail: {},
       //cache: { movies: {}, details: {} }
     };
   }
 
   function get(url) {
     return new Promise((resolve, reject) => {
-      /*const xhr = new XMLHttpRequest();
+      const xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function() {
         if (xhr.readyState !== 4) return;
         if (xhr.status >= 200 && xhr.status < 300) {
@@ -21,9 +21,9 @@ function Model() {
       url = `https://www.omdbapi.com?apikey=f12ba140&${url}`;
       console.log(url);
       xhr.open('GET', url);
-      xhr.send();*/
+      xhr.send();
 
-      resolve(JSON.parse('{"Search":[{"Title":"Indiana jones","Year":"1978","Type":"Movie","imdbID":"tt0097576","Poster":"https://m.media-amazon.com/images/M/MV5BMjNkMzc2N2QtNjVlNS00ZTk5LTg0MTgtODY2MDAwNTMwZjBjXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_SX300.jpg"}],"totalResults": "88", "Response": "True"}'));
+      //resolve(JSON.parse('{"Search":[{"Title":"Indiana jones","Year":"1978","Type":"Movie","imdbID":"tt0097576","Poster":"https://m.media-amazon.com/images/M/MV5BMjNkMzc2N2QtNjVlNS00ZTk5LTg0MTgtODY2MDAwNTMwZjBjXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_SX300.jpg"}],"totalResults": "88", "Response": "True"}'));
     });
   }
 
@@ -47,7 +47,7 @@ function Model() {
             .catch(console.log);
       });
     },
-    selectDetail: function(imdbID) {
+    showFilmDetail: function(imdbID) {
       return new Promise((resolve, reject) => {
           get(`i=${imdbID}`)
             .then(res => {

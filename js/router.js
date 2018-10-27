@@ -4,7 +4,7 @@
   function FilmsWeb() {
     this.model = new Model();
     this.filmList = new FilmListPresenter(new FilmListView(), this.model);
-    //this.filmDetails = new FilmDetailsPresenter(new FilmDetailView(), this.model);
+    this.filmDetails = new FilmDetailPresenter(new FilmDetailView(), this.model);
     //this.user = new UserPresenter(new LoginView(), new UserView(), this.model);
   }
 
@@ -17,7 +17,7 @@
 
     if (detail !== undefined) {
       // show film detail
-      films.model.selectDetail(detail).then(res => {
+      films.model.showFilmDetail(detail).then(res => {
         films.filmDetails.presentView(res);
       });
     } else if (search !== undefined) {
