@@ -39,7 +39,7 @@
   window.$delegate = function(target, selector, type, handler) {
     function dispatchEvent(event) {
       const targetElement = event.target;
-      const potentialElements = window.target.querySelectorAll(selector);
+      const potentialElements = target.querySelectorAll(selector);
       const hasMatch =
         Array.prototype.indexOf.call(potentialElements, targetElement) >= 0;
 
@@ -51,6 +51,17 @@
     // https://developer.mozilla.org/en-US/docs/Web/Events/blur
     const useCapture = type === 'blur' || type === 'focus';
 
-	  window.target.addEventListener(type, dispatchEvent, useCapture);
+    target.addEventListener(type, dispatchEvent, useCapture);
+  };
+  // Find the element's parent with the given tag name:
+  // $parent(qs('a'), 'div');
+  window.$parent = function(element, tagName) {
+    if (!element.parentNode) {
+      return;
+    }
+    if (element.parentNode.tagName.toLowerCase() === tagName.toLowerCase()) {
+      return element.parentNode;
+    }
+    return window.$parent(element.parentNode, tagName);
   };
 })();

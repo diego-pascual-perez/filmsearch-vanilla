@@ -17,6 +17,12 @@ function FilmListPresenter(_view, _model) {
         view.addShowFilmDetailsHandler(function(imdbID) {
           document.location.hash += '/' + encodeURIComponent(imdbID);
         });
+        view.addShowFilmDetailsFromEmHandler(function(imdbID) {
+          document.location.hash += '/' + encodeURIComponent(imdbID);
+        });
+        view.addShowFilmDetailsFromImgHandler(function(imdbID) {
+          document.location.hash += '/' + encodeURIComponent(imdbID);
+        });
         /*view.toogleFavouriteHandler(function(imdbID) {
           model.toogleFavourite(imdbID);
           document.location.reload();

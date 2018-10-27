@@ -3,17 +3,17 @@ function FilmListView() {
     let i;
     let view = '';
     for (i = 0; i < films.length; i++) {
-      let template = `<div class="resultsrow">
+      let template = `<li class="resultsrow" data-id=${films[i].imdbID}>
 				<div class="resultsrow-in">
 					<img src=` + films[i].Poster + ` alt=` + films[i].Title + `>
 					<div class="resultsrow-right">
-						<div class="resultsrow-title">` + films[i].Title + `</div>
-						<div class="resultsrow-year">Year: ` + films[i].Year + `</div>
-						<div class="resultsrow-imdbID">imdbID: ` + films[i].imdbID + `</div>
+						<div class="resultsrow-title"><em>` + films[i].Title + `</em></div>
+						<div class="resultsrow-year"><em>Year: ` + films[i].Year + `</em></div>
+						<div class="resultsrow-imdbID"><em>imdbID: ` + films[i].imdbID + `</em></div>
 					</div>
 				</div>
 				{{likes}}
-			</div>`;
+			</li>`;
      
       if (films[i].isFavourite) {
 	      template = template.replace('{{likes}}', `<div class="liked">Liked!</div>`);
@@ -37,7 +37,7 @@ function FilmListView() {
 					      		<input class="searchinput" id="searchinput" type="text" placeholder="Insert film" />
 					      		<div class="searchbutton">Search</div>
 					      	</div>
-					      	<div class="searchresults">` + showFilms(films) + `</div>`;
+					      	<ul class="searchresults">` + showFilms(films) + `</ul>`;
       } else {
         document.querySelector('#main').innerHTML = `<div className="searchform">Search a film:
 					      		<input class="searchinput" id="searchinput" type="text" placeholder="Insert film" />
@@ -52,9 +52,19 @@ function FilmListView() {
     },
     addShowFilmDetailsHandler: function(handler) {
     	console.log(document.querySelector('.searchresults'));
-      //$delegate(document.querySelector('.searchresults'), '.resultsrow', 'click', function() {
-      //  handler(this);
-      //});
+      $delegate(document.querySelector('.searchresults'), 'li .resultsrow-in', 'click', function() {
+        handler(itemId(this));
+      });
+    },
+    addShowFilmDetailsFromEmHandler: function(handler) {
+      $delegate(document.querySelector('.searchresults'), 'li .resultsrow-in em', 'click', function() {
+        handler(itemId(this));
+      });
+    },
+    addShowFilmDetailsFromImgHandler: function(handler) {
+      $delegate(document.querySelector('.searchresults'), 'li .resultsrow-in img', 'click', function() {
+        handler(itemId(this));
+      });
     },
     toogleFavouriteHandler: function(handler) {
       $delegate(document.querySelector('.movie-list'), 'li .list-title span', 'click', function() {
