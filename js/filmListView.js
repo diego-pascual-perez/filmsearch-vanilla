@@ -51,6 +51,11 @@ function FilmListView() {
 					      	</div>`;
       }
     },
+    paginateView: function(films) {
+      if (films) {
+        document.querySelector('.searchresults').innerHTML += showFilms(films);
+      }
+    },
     addSearchFilmsHandler: function(handler) {
     	document.querySelector('#searchinput').addEventListener('change', function() {
         handler(document.querySelector('#searchinput').value);

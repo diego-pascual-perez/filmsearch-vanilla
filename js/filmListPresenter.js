@@ -52,6 +52,12 @@ function FilmListPresenter(_view, _model) {
             if ((model.getState().films.length - 1) * 150 < element.clientHeight + element.scrollTop) {
               console.log("next page");
               model.setPaginating(true);
+              model.paginateSearchMovies().then(res => {
+                if (res.films.length > 0) {
+                  view.paginateView(res.films);
+                  model.setPaginating(false);
+                }
+              });
             }
           }
         });

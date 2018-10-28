@@ -2,11 +2,12 @@ function Model() {
   let state;
   function init() {
     state = {
+      searchvalue: '',
       films: [],
       showfilmdetail: {},
       user: JSON.parse(sessionStorage.getItem('user')) || {},
       paginating: false,
-      //cache: { movies: {}, details: {} }
+      searchPage: 1,
     };
   }
 
@@ -33,6 +34,7 @@ function Model() {
       return state;
     },
     searchMovies: function(query) {
+      state.searchvalue = query;
       return new Promise((resolve, reject) => {
           get(`s=${query}`)
             .then(res => {
@@ -44,6 +46,7 @@ function Model() {
                   };
                 });
                 state.films = movies;
+                state.searchPage = 1;
                 resolve({films: state.films,totalResults:res.totalResults});
               } else {
                 resolve({films: [],totalResults:0});
@@ -52,6 +55,29 @@ function Model() {
             .catch(console.log);
       });
     },
+    paginateSearchMovies: function() {
+      return new Promise((resolve, reject) => {
+          state.searchPage = state.searchPage + 1;
+          get(`s=${state.searchvalue}&page=${state.searchPage}`)
+            .then(res => {
+              if (res.Response === 'True') {
+                const movies = res.Search.map(item => {
+                  return {
+                    ...item,
+                    isFavourite: public.getLikes().includes(item.imdbID)
+                  };
+                });
+                movies.forEach(item => {
+                  state.films.push(item);
+                });
+                resolve({films: movies,totalResults:res.totalResults});
+              } else {
+                resolve({films: [],totalResults:0});
+              }
+            })
+            .catch(console.log);
+      });
+    },    
     showFilmDetail: function(imdbID) {
       return new Promise((resolve, reject) => {
           get(`i=${imdbID}`)
