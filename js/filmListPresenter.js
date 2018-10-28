@@ -24,20 +24,28 @@ function FilmListPresenter(_view, _model) {
           document.location.hash += '/' + encodeURIComponent(imdbID);
         });
         view.addLikeHandler(function(imdbID,element) {
-          model.addDeleteLike(imdbID);
-          element.innerHTML = "Liked!";
-          setTimeout(function(){
-            element.classList.remove("like");
-            element.classList.add("liked");
-          }, 500);
+          if (model.getUser() !== null) {
+            model.addDeleteLike(imdbID);
+            element.innerHTML = "Liked!";
+            setTimeout(function(){
+              element.classList.remove("like");
+              element.classList.add("liked");
+            }, 500);
+          } else {
+            alert('Please, log in first');
+          }
         });
         view.deleteLikeHandler(function(imdbID,element) {
-          model.addDeleteLike(imdbID);
-          element.innerHTML = "Like";
-          setTimeout(function(){
-            element.classList.remove("liked");
-            element.classList.add("like");
-          }, 500);
+          if (model.getUser() !== null) {
+            model.addDeleteLike(imdbID);
+            element.innerHTML = "Like";
+            setTimeout(function(){
+              element.classList.remove("liked");
+              element.classList.add("like");
+            }, 500);
+          } else {
+            alert('Please, log in first');
+          }
         });
         view.addOnScrollSearchResultsHandler(function(element) {
           if(!model.getState().paginating) {
