@@ -36,14 +36,18 @@ function Model() {
       return new Promise((resolve, reject) => {
           get(`s=${query}`)
             .then(res => {
-              const movies = res.Search.map(item => {
-                return {
-                  ...item,
-                  isFavourite: public.getLikes().includes(item.imdbID)
-                };
-              });
-              state.films = movies;
-              resolve({films: state.films,totalResults:res.totalResults});
+              if (res.Response === 'True') {
+                const movies = res.Search.map(item => {
+                  return {
+                    ...item,
+                    isFavourite: public.getLikes().includes(item.imdbID)
+                  };
+                });
+                state.films = movies;
+                resolve({films: state.films,totalResults:res.totalResults});
+              } else {
+                resolve({films: [],totalResults:0});
+              }
             })
             .catch(console.log);
       });
