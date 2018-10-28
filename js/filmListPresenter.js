@@ -7,8 +7,8 @@ function FilmListPresenter(_view, _model) {
   }
 
   const public = {
-    presentView: function(list) {
-      view.presentView(list);
+    presentView: function(list,totalResults) {
+      view.presentView(list,totalResults);
       view.addSearchFilmsHandler(function(query) {
         console.log({ query });
         document.location.hash = '/' + encodeURIComponent(query);

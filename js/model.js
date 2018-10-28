@@ -43,7 +43,7 @@ function Model() {
                 };
               });
               state.films = movies;
-              resolve(state.films);
+              resolve({films: state.films,totalResults:res.totalResults});
             })
             .catch(console.log);
       });

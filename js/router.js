@@ -23,11 +23,11 @@
     } else if (search !== undefined) {
       // show search result
       films.model.searchMovies(search).then(res => {
-        films.filmList.presentView(res);
+        films.filmList.presentView(res.films,res.totalResults);
       });
     } else {
       // empty search
-      films.filmList.presentView(null);
+      films.filmList.presentView(null,null);
     }
     films.user.presentView();
   }

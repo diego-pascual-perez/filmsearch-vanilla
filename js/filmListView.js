@@ -36,15 +36,16 @@ function FilmListView() {
   };
 
   const public = {
-    presentView: function(films) {
+    presentView: function(films,totalResults) {
       if (films) {
-        document.querySelector('#main').innerHTML = `<div className="searchform">Search a film:
+        document.querySelector('#main').innerHTML = `<div class="searchform">Search a film:
 					      		<input class="searchinput" id="searchinput" type="text" placeholder="Insert film" />
-					      		<div class="searchbutton">Search</div>
+                    <div class="searchbutton">Search</div>
+                    <div class="searchtotalresults">${totalResults} films found</div>
 					      	</div>
 					      	<ul class="searchresults">` + showFilms(films) + `</ul>`;
       } else {
-        document.querySelector('#main').innerHTML = `<div className="searchform">Search a film:
+        document.querySelector('#main').innerHTML = `<div class="searchform">Search a film:
 					      		<input class="searchinput" id="searchinput" type="text" placeholder="Insert film" />
 					      		<div class="searchbutton">Search</div>
 					      	</div>`;
