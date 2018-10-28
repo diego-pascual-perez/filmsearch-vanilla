@@ -7,6 +7,7 @@ function Model() {
       showfilmdetail: {},
       user: JSON.parse(sessionStorage.getItem('user')) || {},
       paginating: false,
+      hasMoreFilms: true,
       searchPage: 1,
     };
   }
@@ -47,8 +48,10 @@ function Model() {
                 });
                 state.films = movies;
                 state.searchPage = 1;
+                state.hasMoreFilms = true;
                 resolve({films: state.films,totalResults:res.totalResults});
               } else {
+                state.hasMoreFilms = false;
                 resolve({films: [],totalResults:0});
               }
             })
@@ -72,6 +75,7 @@ function Model() {
                 });
                 resolve({films: movies,totalResults:res.totalResults});
               } else {
+                state.hasMoreFilms = false;
                 resolve({films: [],totalResults:0});
               }
             })

@@ -48,15 +48,15 @@ function FilmListPresenter(_view, _model) {
           }
         });
         view.addOnScrollSearchResultsHandler(function(element) {
-          if(!model.getState().paginating) {
+          if(!model.getState().paginating && model.getState().hasMoreFilms) {
             if ((model.getState().films.length - 1) * 150 < element.clientHeight + element.scrollTop) {
               document.querySelector('.loading').classList.remove("hide");
               model.setPaginating(true);
               model.paginateSearchMovies().then(res => {
                 if (res.films.length > 0) {
                   view.paginateView(res.films);
-                  model.setPaginating(false);
                 }
+                model.setPaginating(false);
                 document.querySelector('.loading').classList.add("hide");
               });
             }
