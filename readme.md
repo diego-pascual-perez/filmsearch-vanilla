@@ -1,4 +1,4 @@
 ## Films search (Vanilla JavaScript )
-Getting Started
+# Getting Started
 - Clone this repo.
 - Open index.html.
