@@ -65,13 +65,9 @@ function FilmListView() {
       $delegate(document.querySelector('.searchresults'), 'li .resultsrow-in', 'click', function() {
         handler(itemId(this));
       });
-    },
-    addShowFilmDetailsFromEmHandler: function(handler) {
       $delegate(document.querySelector('.searchresults'), 'li .resultsrow-in em', 'click', function() {
         handler(itemId(this));
       });
-    },
-    addShowFilmDetailsFromImgHandler: function(handler) {
       $delegate(document.querySelector('.searchresults'), 'li .resultsrow-in img', 'click', function() {
         handler(itemId(this));
       });
@@ -86,11 +82,36 @@ function FilmListView() {
         handler(itemId(this),this);
       });
     },
+    toogleLikeButton: function(element,islike) {
+    	if (islike) {
+	    	element.innerHTML = "Liked!";
+	      setTimeout(function(){
+	      	element.classList.remove("like");
+	        element.classList.add("liked");
+	      }, 500);
+	    } else {
+	    	element.innerHTML = "Like";
+        setTimeout(function(){
+        	element.classList.remove("liked");
+          element.classList.add("like");
+        }, 500);
+	    }
+    },
+    alertLogin: function() {
+    	alert('Please, log in first');
+    },
     addOnScrollSearchResultsHandler: function(handler) {
     	document.querySelector('.searchresults').addEventListener("scroll", function() {
         handler(this);
       });
     },
+    showLoading(value) {
+	    if (value) {
+	    	document.querySelector('.loading').classList.remove("hide");
+	    } else {
+	    	document.querySelector('.loading').classList.add("hide");
+	    }
+	  },
   };
 
   return public;
